@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="513.0" minWidth="815.0" prefHeight="513.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DesignController">
+   <children>
+      <TabPane layoutX="-182.0" layoutY="-184.0" minHeight="513.0" minWidth="817.0" prefHeight="513.0" prefWidth="817.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Programm">
+               <content>
+                  <AnchorPane prefHeight="350.0" prefWidth="576.0">
+                     <children>
+                        <GridPane hgap="20.0" layoutX="20.0" layoutY="205.0" prefHeight="46.0" prefWidth="355.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="440.0" AnchorPane.topAnchor="205.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="252.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="575.0" minWidth="10.0" prefWidth="83.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints maxHeight="84.0" minHeight="3.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="175.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ComboBox fx:id="CBB_Aktion1" prefHeight="25.0" prefWidth="247.0" GridPane.rowIndex="1">
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </ComboBox>
+                              <TextField fx:id="TF_Text1" prefHeight="25.0" prefWidth="109.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="XML aufteilen nach" wrappingWidth="248.1796875" />
+                              <Text fx:id="T_Text1" strokeType="OUTSIDE" strokeWidth="0.0" text="MB" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="GP_XMLInfos" layoutX="20.0" layoutY="14.0" prefHeight="126.0" prefWidth="234.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="515.0" AnchorPane.topAnchor="8.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="124.0" prefWidth="124.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="XML Informationen" wrappingWidth="184.03515625" GridPane.columnSpan="2">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Application" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_Application" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="48.8349609375" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_ID" strokeType="OUTSIDE" strokeWidth="0.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MapID" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_MapID" strokeType="OUTSIDE" strokeWidth="0.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Version" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_Version" strokeType="OUTSIDE" strokeWidth="0.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Daten" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_AnzahlDaten" strokeType="OUTSIDE" strokeWidth="0.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </GridPane>
+                        <Button fx:id="BTN_XMLEinlesen" layoutX="20.0" layoutY="280.0" mnemonicParsing="false" onAction="#XMLEinlesen" prefHeight="34.0" prefWidth="112.0" text="XML Einlesen" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="280.0" />
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
+          <Tab text="Einstellungen">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="14.0" layoutY="14.0" prefHeight="42.0" prefWidth="535.0">
+                           <children>
+                              <Hyperlink accessibleHelp="Hier kann die XML Datei welche umgewandelt werden soll, angegeben werden." onAction="#openFileChooserQuelldatei" text="Quelldatei" />
+                              <TextField fx:id="TF_Quelldatei" accessibleHelp="Hier kann die XML Datei welche umgewandelt werden soll, angegeben werden." prefHeight="25.0" prefWidth="504.0" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="14.0" layoutY="75.0" prefHeight="42.0" prefWidth="535.0">
+                           <children>
+                              <Hyperlink accessibleHelp="In diesen Pfad werden die neu erstellten XML-Files gespeichert." onAction="#openFileChooserZieldatei" text="Zielpfad" />
+                              <TextField fx:id="TF_Zieldatei" accessibleHelp="In diesen Pfad werden die neu erstellten XML-Files gespeichert." prefHeight="25.0" prefWidth="491.0" />
+                           </children>
+                        </VBox>
+                        <CheckBox fx:id="CHB_DatenArchivieren" accessibleHelp="Möchten Sie das Original sowie die Kopien irgendwo speichern? Geben Sie hier den Pfad dazu an." layoutX="16.0" layoutY="154.0" mnemonicParsing="false" onAction="#setArchivordnervisible" text="Daten archivieren" />
+                        <VBox fx:id="VB_Archivordner" layoutX="14.0" layoutY="174.0" prefHeight="42.0" prefWidth="535.0" visible="false">
+                           <children>
+                              <Hyperlink accessibleHelp="In diesen Pfad werden die verarbeiteten Daten (Original und neue Daten) gespeichert." onAction="#openFileChooserArchivordner" text="Archivordner" />
+                              <TextField fx:id="TF_Archivordner" accessibleHelp="In diesen Pfad werden die verarbeiteten Daten (Original und neue Daten) gespeichert." prefHeight="25.0" prefWidth="491.0" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="BTN_Speichern" layoutX="16.0" layoutY="252.0" mnemonicParsing="false" onAction="#saveDataEinstellungen" prefHeight="33.0" prefWidth="112.0" text="Speichern" />
+                        <TextField layoutX="226.0" layoutY="252.0" />
+                        <Button fx:id="BTN_Testbutton" layoutX="16.0" layoutY="304.0" mnemonicParsing="false" onAction="#test" prefHeight="50.0" prefWidth="122.0" text="Testbutton" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
