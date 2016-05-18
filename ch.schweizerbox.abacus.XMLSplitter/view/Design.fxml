@@ -45,10 +45,10 @@
                               <Text fx:id="T_Text1" strokeType="OUTSIDE" strokeWidth="0.0" text="MB" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <GridPane fx:id="GP_XMLInfos" layoutX="20.0" layoutY="14.0" prefHeight="126.0" prefWidth="234.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="515.0" AnchorPane.topAnchor="8.0">
+                        <GridPane fx:id="GP_XMLInfos" layoutX="20.0" layoutY="15.0" prefHeight="130.0" prefWidth="311.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="484.0" AnchorPane.topAnchor="15.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="124.0" prefWidth="124.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="110.0" prefWidth="157.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="61.0" prefWidth="129.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -56,6 +56,7 @@
                             <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
@@ -104,12 +105,22 @@
                                     <Font size="14.0" />
                                  </font>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Daten" GridPane.rowIndex="5">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anzahl Datensätze" GridPane.rowIndex="5">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Text>
                               <Text fx:id="T_AnzahlDaten" strokeType="OUTSIDE" strokeWidth="0.0" text=" " GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grösse Datei (MB)" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="T_GroesseDatei" strokeType="OUTSIDE" strokeWidth="0.0" text=" " wrappingWidth="117.8349609375" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

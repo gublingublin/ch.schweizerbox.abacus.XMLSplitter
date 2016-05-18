@@ -3,6 +3,8 @@ package view;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 import javax.swing.JOptionPane;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,7 +29,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.DataEinstellungen;
 import model.SaveLoadData;
-import model.XMLReader;
+import model.XMLConverter;
 
 
 public class DesignController {
@@ -48,6 +50,8 @@ public class DesignController {
 	@FXML private ComboBox<String> CBB_Aktion1;
 	@FXML private ComboBox<String> CBB_XMLElement1;
 	@FXML private TextField TF_Text1;
+	@FXML private Text T_AnzahlDaten;
+	@FXML private Text T_GroesseDatei;
 	SaveLoadData saveLoadData = new SaveLoadData();
 
 	
@@ -88,30 +92,32 @@ public class DesignController {
 	
 	
 	// ----------------------------------------------Funktionen-----------------------------------------------
-
-	
-	
 	public void test() throws ParserConfigurationException, SAXException, IOException{
-		XMLReader xmlreader = new XMLReader();
-		xmlreader.getXMLElements(new File(TF_Quelldatei.getText()), "Transaction");
-//		xmlreader.buildXML(new File(TF_Quelldatei.getText()), "Parameter", "Application");
-		
-	
+		XMLConverter xmlcopy = new XMLConverter();
+		xmlcopy.copyXMLtoArchiv(TF_Quelldatei.getText(), TF_Archivordner.getText());
 	}
 	
 	public void XMLEinlesen() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException{
-		XMLReader xmlreader = new XMLReader();
+		XMLConverter xmlreader = new XMLConverter();
 		// Welche Daten werden benötigt?
-		Element applikation = xmlreader.buildXML(new File(TF_Quelldatei.getText()), "Parameter", "Application");
-		Element iD = xmlreader.buildXML(new File(TF_Quelldatei.getText()), "Parameter", "Id");
-		Element mapId = xmlreader.buildXML(new File(TF_Quelldatei.getText()), "Parameter", "MapId");
-		Element version = xmlreader.buildXML(new File(TF_Quelldatei.getText()), "Parameter", "Version");
+		File inputFile = new File(TF_Quelldatei.getText());
+		Element applikation = xmlreader.getXMLMetaData(inputFile, "Parameter", "Application");
+		Element iD = xmlreader.getXMLMetaData(inputFile, "Parameter", "Id");
+		Element mapId = xmlreader.getXMLMetaData(inputFile, "Parameter", "MapId");
+		Element version = xmlreader.getXMLMetaData(inputFile, "Parameter", "Version");
+		int anzahlXMLElements = xmlreader.getNumberofXMLElements(inputFile, "Transaction");
+		double groesseDatei = xmlreader.getSizeofXML(inputFile);
+		DecimalFormat decimalFormat = new DecimalFormat("###0.000");
+				
 		
 		//Schreibt die Daten in die Textfelder auf dem Hauptmenu
 		T_Application.setText(applikation.getTextContent());
 		T_ID.setText(iD.getTextContent());
 		T_MapID.setText(mapId.getTextContent());
 		T_Version.setText(version.getTextContent());
+		T_AnzahlDaten.setText(String.valueOf(anzahlXMLElements));
+		T_GroesseDatei.setText(decimalFormat.format(groesseDatei));
+		
 	}
 	
 	

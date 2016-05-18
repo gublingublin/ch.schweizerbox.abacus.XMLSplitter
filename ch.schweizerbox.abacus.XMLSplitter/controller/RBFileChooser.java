@@ -23,6 +23,7 @@ public class RBFileChooser{
 		case 1:
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Öffne Datei");
+			fileChooser.setSelectedExtensionFilter(new ExtensionFilter("XML Dateien", "*xml"));
 			fileChooser.getExtensionFilters().addAll(
 //					 new ExtensionFilter("Alle Dateien", "*.*"),
 //			         new ExtensionFilter("Bilddateien", "*.png", "*.jpg", "*.gif"),
