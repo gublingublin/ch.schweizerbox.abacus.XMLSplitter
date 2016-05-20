@@ -48,8 +48,7 @@ public class DesignController {
 	@FXML private Text T_MapID;
 	@FXML private Text T_Version;
 	@FXML private ComboBox<String> CBB_Aktion1;
-	@FXML private ComboBox<String> CBB_XMLElement1;
-	@FXML private TextField TF_Text1;
+	@FXML private TextField TF_max;
 	@FXML private Text T_AnzahlDaten;
 	@FXML private Text T_GroesseDatei;
 	SaveLoadData saveLoadData = new SaveLoadData();
@@ -93,8 +92,12 @@ public class DesignController {
 	
 	// ----------------------------------------------Funktionen-----------------------------------------------
 	public void test() throws ParserConfigurationException, SAXException, IOException{
-		XMLConverter xmlcopy = new XMLConverter();
-		xmlcopy.copyXMLtoArchiv(TF_Quelldatei.getText(), TF_Archivordner.getText());
+		XMLConverter xmlcopy = new XMLConverter();		
+		xmlcopy.splitXML(TF_Quelldatei.getText(), TF_Zieldatei.getText(), TF_Archivordner.getText(), CBB_Aktion1.getValue(),TF_max.getText());
+
+		
+//		xmlcopy.copyXMLtoArchiv(TF_Quelldatei.getText(), TF_Archivordner.getText());
+		
 	}
 	
 	public void XMLEinlesen() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException{
@@ -106,8 +109,8 @@ public class DesignController {
 		Element mapId = xmlreader.getXMLMetaData(inputFile, "Parameter", "MapId");
 		Element version = xmlreader.getXMLMetaData(inputFile, "Parameter", "Version");
 		int anzahlXMLElements = xmlreader.getNumberofXMLElements(inputFile, "Transaction");
-		double groesseDatei = xmlreader.getSizeofXML(inputFile);
-		DecimalFormat decimalFormat = new DecimalFormat("###0.000");
+		String groesseDatei = xmlreader.getSizeofXML(inputFile);
+		
 				
 		
 		//Schreibt die Daten in die Textfelder auf dem Hauptmenu
@@ -116,7 +119,7 @@ public class DesignController {
 		T_MapID.setText(mapId.getTextContent());
 		T_Version.setText(version.getTextContent());
 		T_AnzahlDaten.setText(String.valueOf(anzahlXMLElements));
-		T_GroesseDatei.setText(decimalFormat.format(groesseDatei));
+		T_GroesseDatei.setText(groesseDatei);
 		
 	}
 	
