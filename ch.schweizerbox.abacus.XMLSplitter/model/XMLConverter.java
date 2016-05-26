@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
@@ -14,7 +15,15 @@ import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -159,13 +168,14 @@ public class XMLConverter {
 
 
 
-	public void splitXML(String quelldatei, String zieldatei, String archivPfad, String auswahlSplitting, String maxGroesse) throws ParserConfigurationException, SAXException, IOException{
-		//Prüfung der Eingaben
+	public void splitXML(String quelldatei, String zieldatei, String archivPfad, String auswahlSplitting, String maxGroesse) throws ParserConfigurationException, SAXException, IOException, TransformerException{
+
+		//**************Prüfung der Eingaben***************
 		File quellFile = new File(quelldatei);
 		File zielFile = new File(zieldatei);
 		File archivPfadFile = new File(archivPfad);
-		String XMLVaterElement = "Transaction"; 
-		String XMLKindElement = "Parameter";
+		String XMLVaterElement = "Task"; 
+		String XMLKindElement = "Transaction";
 		
 		
 		if(quellFile.exists() == false | archivPfadFile.exists() == false){
@@ -176,7 +186,7 @@ public class XMLConverter {
 			JOptionPane.showMessageDialog(null, "Es wurde noch kein XML-File für das Splitting eingelesen!");
 			} else {
 				
-			//Berechnung Anzahl Datensätze pro Datei je nach Auswahl in der Combobox	
+			//*******************Berechnung Anzahl Datensätze pro Datei je nach Auswahl in der Combobox**************************
 			switch (auswahlSplitting) {
 			case "Maximale Grösse in MB":
 				double anzahlXML = xmlSize / Double.parseDouble(maxGroesse);
@@ -196,7 +206,7 @@ public class XMLConverter {
 			}
 			
 			
-			//Aufbereitung der XML
+			//*******************Aufbereitung der XML*************************************
 			DocumentBuilderFactory fabrik = DocumentBuilderFactory.newInstance();
 			Element out = null;
 			
@@ -207,34 +217,71 @@ public class XMLConverter {
 			
 			//		Erstellt eine Liste mit allen Elementen die den Namen des XML-Elements "XMLVaterElement" tragen (überall wo <XMLVaterElement> im XML steht)
 			NodeList nodeList = dokument.getElementsByTagName(XMLVaterElement);
+			
 			//		Gibt alle Subelemente (Knoten) des XMLVaterelements an der Position 0 aus:
 			
 			System.out.println("Beginn Nodelist für **********" +"'XMLVaterElement': " + XMLVaterElement + " / 'XMLKindElement': "+XMLKindElement);
 			//		In der Liste sind nun alle SubElemente (Knoten) des XMLVaterElement zu finden. 
 			//		Die nachstehende Funktion prüft nun welches Element in out geschrieben werden soll.
 			//		Mann kann den Namen des XMLKindeElement angeben oder auch nach Elementtyp / Attribut / Text Filtern.
-			
-//			System.out.println("NodeName: " + nodeList.item(0).getNodeName());
-//			System.out.println("NodeType: " + nodeList.item(0).getNodeType());
-//			System.out.println("NodeValue: " + nodeList.item(0).getNodeValue());
-//			System.out.println("NodeParentNode: " + nodeList.item(0).getParentNode());
-//			System.out.println("NodeParentNode.NodeName: " + nodeList.item(0).getParentNode().getNodeName());
-//			System.out.println("NodeChildNodes: " + nodeList.item(0).getChildNodes());
-////			System.out.println("TextContent: " + nodeList.item(0).getTextContent());
-////			System.out.println("NextSibling: " + nodeList.item(0).getNextSibling().getNodeName());
-//			System.out.println("Prefix: " + nodeList.item(0).getPrefix());
-//			System.out.println("Attribute: " + nodeList.item(0).getAttributes());
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node knoten = nodeList.item(i);
 				
-				System.out.println("NodeName: " + nodeList.item(i).getNodeName());
-				System.out.println("NodeType: " + nodeList.item(i).getNodeType());
-				System.out.println("NodeValue: " + nodeList.item(i).getNodeValue());
-				System.out.println("Attribute: " + nodeList.item(i).getAttributes());
-				System.out.println(i);
-			}
+				System.out.println(knoten);
+				System.out.println("Children "+ knoten.hasChildNodes());
+				System.out.println("einfache Nummerierung: "+i);
+				System.out.println("NodeName: " + knoten.getNodeName());
+				System.out.println("NodeType: " + knoten.getNodeType());
+				System.out.println("NodeValue: " + knoten.getNodeValue());
+				System.out.println("Attributes: "+knoten.getPrefix());
 				
+			}
+			System.out.println("Ende NodeList------");
+			
+			for(int i = 0; i<nodeList.getLength(); i++){
+			Node knoten = nodeList.item(i);
+			if(knoten.getNodeName() == XMLKindElement){
+				Element element = (Element) knoten;
+				out = (Element) element.getElementsByTagName(XMLKindElement).item(i);
+				System.out.println("Nodeout: " + out);
+			}
+			
+		}
+			
+			
+			//Erstellt das neue XML:
+			File xmlNeu = new File("C:\\Users\\Roland.Schweizer\\OneDrive\\Privat\\Programmieren\\Projekte Eclipse\\ch.schweizerbox.XMLConverter\\Belegeumgewandelt.XML\\out.xml");
+			FileOutputStream newXMLFile = new FileOutputStream(xmlNeu); 
+			Document newXML = documentBauer.newDocument();
+				Element xmlRootElement = newXML.createElement("AbaConnectContainer");
+				newXML.appendChild(xmlRootElement);
+				
+				Element taskCountElement = newXML.createElement("TaskCount");
+				taskCountElement.setTextContent("1");
+				xmlRootElement.appendChild(taskCountElement);
+				
+				Element task = newXML.createElement("Task");
+				xmlRootElement.appendChild(task);
+			
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node knoten = nodeList.item(i);
+				Element Transactionelement = (Element) knoten;
+				
+				Transactionelement = newXML.createElement("Transaction");
+				task.appendChild(Transactionelement);
+			}
+			
+			
+			TransformerFactory transformerFabrik = TransformerFactory.newInstance();
+			Transformer transformer = transformerFabrik.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent -amount", "2");
+			DOMSource quelle = new DOMSource(newXML);
+			StreamResult ziel = new StreamResult(xmlNeu);
+			transformer.transform(quelle, ziel);
+			
+			
 			
 //			for(int i = 0; i<nodeList.getLength(); i++){
 //				Node knoten = nodeList.item(i);
@@ -246,17 +293,8 @@ public class XMLConverter {
 //				
 //			}
 			
-//			for(int i = 0; i<nodeList.getLength(); i++){
-//				Node knoten = nodeList.item(i);
-//				if(knoten.getNodeType() == Node.ELEMENT_NODE){
-//					Element element = (Element) knoten;
-//					out = (Element) element.getElementsByTagName(XMLKindElement).item(i);
-//					System.out.println(out);
-//				}
-//				
-//			}
 			
-			System.out.println("Ende NodeList------");
+
 
 			
 			

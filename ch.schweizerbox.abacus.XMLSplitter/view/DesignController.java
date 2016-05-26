@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -91,7 +92,7 @@ public class DesignController {
 	
 	
 	// ----------------------------------------------Funktionen-----------------------------------------------
-	public void test() throws ParserConfigurationException, SAXException, IOException{
+	public void test() throws ParserConfigurationException, SAXException, IOException, TransformerException{
 		XMLConverter xmlcopy = new XMLConverter();		
 		xmlcopy.splitXML(TF_Quelldatei.getText(), TF_Zieldatei.getText(), TF_Archivordner.getText(), CBB_Aktion1.getValue(),TF_max.getText());
 
